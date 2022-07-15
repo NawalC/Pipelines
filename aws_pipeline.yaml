@@ -18,8 +18,9 @@ stages:
     steps:
     - task: TerraformInstaller@0
       displayName: 'Terraform Install'
-      terraformVersion: 'latest'
-      downloadUrl: 'https://releases.hashicorp.com/terraform/1.2.5/'
+      inputs:
+        terraformVersion: 'latest'
+        downloadUrl: 'https://releases.hashicorp.com/terraform/1.2.5/'
     - task: TerraformTaskV3@3
       displayName: 'Terraform Initialise'
       inputs:
