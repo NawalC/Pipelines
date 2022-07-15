@@ -2,10 +2,10 @@ trigger:
   batch: true
   branches:
     include:
-    - master
+    - main
   paths:
     include:
-    - IaaS_Web_Solution
+    - AWS_Pipeline
 variables:
 - group: terraform-config
 stages:
