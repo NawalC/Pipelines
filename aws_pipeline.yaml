@@ -21,9 +21,10 @@ stages:
       inputs:
         terraformVersion: $(terraformVersion)
     - task: TerraformTaskV3@3
-    inputs:
-      provider: 'aws'
-      command: 'init'
-      backendServiceAWS: 'pipeline'
-      backendAWSBucketName: 'tf-training-state-file-14072022'
-      backendAWSKey: 'main'    
+      displayName: 'Terraform Initialise'
+      inputs:
+        provider: 'aws'
+        command: 'init'
+        backendServiceAWS: 'pipeline'
+        backendAWSBucketName: 'tf-training-state-file-14072022'
+        backendAWSKey: 'main'    
