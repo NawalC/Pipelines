@@ -1,0 +1,29 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - IaaS_Web_Solution
+variables:
+- group: terraform-config
+stages:
+- stage: plan
+  jobs:
+  - job: Deploy
+    continueOnError: false
+    pool:
+      vmImage: 'ubuntu-latest'  
+    steps:
+    - task: TerraformInstaller@0
+      displayName: 'Terraform Install'
+      inputs:
+        terraformVersion: $(terraformVersion)
+    - task: TerraformTaskV3@3
+    inputs:
+      provider: 'aws'
+      command: 'init'
+      backendServiceAWS: 'pipeline'
+      backendAWSBucketName: 'tf-training-state-file-14072022'
+      backendAWSKey: 'main'    
