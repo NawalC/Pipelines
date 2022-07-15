@@ -27,4 +27,9 @@ stages:
         command: 'init'
         backendServiceAWS: 'pipeline'
         backendAWSBucketName: 'tf-training-state-file-14072022'
-        backendAWSKey: 'main'    
+        backendAWSKey: 'main'
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform Validate'
+      inputs:
+        provider: 'aws'
+        command: 'validate'        
