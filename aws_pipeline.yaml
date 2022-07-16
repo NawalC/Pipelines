@@ -22,7 +22,7 @@ stages:
         terraformVersion: 'latest'
         downloadUrl: 'https://releases.hashicorp.com/terraform/1.2.5/'
     - task: TerraformTaskV3@3
-      displayName: 'Terraform Initialise'
+      displayName: 'Terraform Init'
       inputs:
         provider: 'aws'
         command: 'init'
@@ -33,4 +33,12 @@ stages:
       displayName: 'Terraform Validate'
       inputs:
         provider: 'aws'
-        command: 'validate'        
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform Plan'
+      inputs:
+        provider: 'aws'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+        environmentServiceNameAWS: 'pipeline'        
