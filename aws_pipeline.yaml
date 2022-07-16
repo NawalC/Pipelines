@@ -16,7 +16,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'  
     steps:
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformInstaller@0
+    - task: TerraformInstaller@0
       displayName: install terraform
       inputs:
         terraformVersion: latest
