@@ -26,6 +26,7 @@ stages:
         backendServiceAWS: 'pipeline'
         backendAWSBucketName: 'tf-training-state-file-14072022'
         backendAWSKey: 'main'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
     - task: TerraformTaskV3@3
       displayName: 'Terraform Validate'
       inputs:
