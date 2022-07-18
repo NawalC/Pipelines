@@ -6,8 +6,6 @@ trigger:
   paths:
     include:
     - AWS_Pipeline
-variables:
-- group: terraform-config
 stages:
 - stage: plan
   jobs:
