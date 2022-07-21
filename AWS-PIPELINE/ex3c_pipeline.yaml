@@ -4,7 +4,9 @@ variables:
 - group: terraform-aws-config
 
 pool:
-    vmImage: 'ubuntu-latest'  
+    vmImage: 'ubuntu-latest'
+    dependsOn: plan
+    condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))  
 steps:
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
   displayName: install terraform
