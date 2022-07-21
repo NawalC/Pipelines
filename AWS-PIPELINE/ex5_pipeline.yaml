@@ -41,11 +41,11 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
         commandOptions: '-out tfplan'
         environmentServiceNameAWS: 'pipeline'
-    # - task: TerraformTaskV3@3
-    #   displayName: 'Terraform Apply'
-    #   inputs:
-    #     provider: 'aws'
-    #     command: 'apply'
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-Pipeline'
-    #     commandOptions: 'tfplan.out'
-    #     environmentServiceNameAWS: 'pipeline'          
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform Apply'
+      inputs:
+        provider: 'aws'
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+        commandOptions: 'tfplan.out'
+        environmentServiceNameAWS: 'pipeline'          
