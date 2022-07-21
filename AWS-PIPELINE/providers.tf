@@ -7,7 +7,7 @@ terraform {
 }
 
 provider "aws" {
-  #profile = "aws_tf_training"
+  profile = "aws_tf_training"
   region = "eu-west-2"
   alias  = "eu-west-2"
 }

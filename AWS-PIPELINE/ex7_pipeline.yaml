@@ -5,7 +5,7 @@ trigger:
     - main
   paths:
     include:
-    - AWS_Pipeline
+    - AWS-PIPELINE
 stages:
 - stage: plan
   jobs:
@@ -39,7 +39,7 @@ stages:
         provider: 'aws'
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-        #commandOptions: '-out tfplan'
+        #commandOptions: '-out=$(working_directory)/terraform.tfplan'
         environmentServiceNameAWS: 'pipeline'
     - task: TerraformTaskV3@3
       displayName: 'Terraform Apply'
@@ -47,5 +47,5 @@ stages:
         provider: 'aws'
         command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-        #commandOptions: 'tfplan.out -auto-approve'
+        commandOptions: '$(working_directory)/terraform.tfplan --auto-approve'
         environmentServiceNameAWS: 'pipeline'          
