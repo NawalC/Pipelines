@@ -48,8 +48,8 @@ steps:
     environmentServiceNameAWS: $(backendServiceAWS)
     publishPlanResults: 'terraform.tfplan'
     commandOptions: '-out=$(Pipeline.Workspace)/Output/terraform.tfplan'
-    name: 'Variable'
-    displayName: 'Set variable'
+    # name: 'Variable'
+    # displayName: 'Set variable'
     
 # Publish Terraform Plan artifact
 - task: PublishPipelineArtifact@1
@@ -58,7 +58,7 @@ steps:
     targetPath: '$(Pipeline.Workspace)/Output'
     artifact: 'Evaluate'
     publishLocation: 'pipeline'
-    condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
+    
 
 
 # - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
