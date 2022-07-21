@@ -24,7 +24,13 @@ steps:
   inputs:
     provider: 'aws'
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'        
+    workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+    environmentServiceNameAWS: $(backendServiceAWS)
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 
+      'mkdir -p $(Pipeline.Workspace)/output'        
 - task: TerraformTaskV3@3
   displayName: 'Terraform Plan'
   inputs:
@@ -32,10 +38,19 @@ steps:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
     environmentServiceNameAWS: $(backendServiceAWS)
+    commandOptions:  '-out=$(Pipeline.Workspace)/output/tfplan.out'
+    publishPlanResults: 'tfplan.out'
+    name: 'Variable'
+    displayName: 'Set variable'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/output'
+    publishLocation: 'pipeline'  
 - task: TerraformTaskV3@3
   displayName: 'Terraform Apply'
   inputs:
     provider: 'aws'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+    commandOptions:  '$(Pipeline.Workspace)/plan.Deploy/tfplan.out'
     environmentServiceNameAWS: $(backendServiceAWS)     
