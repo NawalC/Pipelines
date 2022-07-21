@@ -15,7 +15,6 @@ pool:
       displayName: install terraform
       inputs:
         terraformVersion: latest
-    
     - task: TerraformTaskV3@3
       displayName: 'Terraform Init'
       inputs:
@@ -24,15 +23,13 @@ pool:
         workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
         backendServiceAWS: $(backendAWSKey)
         backendAWSBucketName: $(tf-training-state-file-14072022)
-        backendAWSKey: $(main)
-        
+        backendAWSKey: $(main)        
     - task: TerraformTaskV3@3
       displayName: 'Terraform Validate'
       inputs:
         provider: 'aws'
         command: 'validate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-        
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'        
     - task: TerraformTaskV3@3
       displayName: 'Terraform Plan'
       inputs:
