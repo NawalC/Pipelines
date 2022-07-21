@@ -47,7 +47,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
     environmentServiceNameAWS: $(backendServiceAWS)
     publishPlanResults: 'terraform.tfplan'
-    commandOptions: '-out=$(Pipeline.Workspace)/Output/terraform.tfplan -detailed-exitcode'
+    commandOptions: '-out=$(Pipeline.Workspace)/Output/terraform.tfplan'
     name: 'Variable'
     displayName: 'Set variable'
 
