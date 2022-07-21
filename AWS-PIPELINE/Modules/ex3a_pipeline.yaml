@@ -21,7 +21,7 @@ steps:
     provider: 'aws'
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-    backendServiceAWS: $(backendAWSKey)
+    backendServiceAWS: $(backendServiceAWS)
     backendAWSBucketName: $(backendAWSBucketName)
     backendAWSKey: $(backendAWSKey)        
 - task: TerraformTaskV3@3
