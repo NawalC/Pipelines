@@ -39,8 +39,7 @@ stages:
         provider: 'aws'
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-        commandOptions: '-out=$(working_directory)/terraform.tfplan'
-        publishPlanResults: aws_terraform_plan
+        #commandOptions: '-out tfplan'
         environmentServiceNameAWS: 'pipeline'
     - task: TerraformTaskV3@3
       displayName: 'Terraform Apply'
@@ -48,5 +47,5 @@ stages:
         provider: 'aws'
         command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-        commandOptions: '$$(working_directory)/terraform.tfplan -auto-approve'
+        #commandOptions: 'tfplan.out -auto-approve'
         environmentServiceNameAWS: 'pipeline'          
