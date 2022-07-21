@@ -12,7 +12,6 @@ steps:
     terraformVersion: latest
 
 # Terraform init
-    
 - task: TerraformTaskV3@3
   displayName: 'Terraform Init'
   inputs:
@@ -24,7 +23,6 @@ steps:
     backendAWSKey: $(backendAWSKey)
 
 # Terraform Validate
-
 - task: TerraformTaskV3@3
   displayName: 'Terraform Validate'
   inputs:
@@ -59,6 +57,10 @@ steps:
     targetPath: '$(Pipeline.Workspace)/Output'
     artifact: 'Evaluate'
     publishLocation: 'pipeline'
+- stage: Apply
+  pool:
+    vmImage: 'ubuntu-latest'
+  dependsOn: Plan
 
 # Apply Terraform Plan
 - task: TerraformTaskV3@3
