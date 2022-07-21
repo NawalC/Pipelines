@@ -64,7 +64,7 @@ steps:
   displayName: 'Publish plan artifact'
   inputs:
     targetPath: '$(Pipeline.Workspace)/output'
-    #artifact: 'Evaluate'
+    artifact: 'Evaluate'
     publishLocation: 'pipeline'
     condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
 
