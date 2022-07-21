@@ -58,7 +58,8 @@ steps:
     targetPath: '$(Pipeline.Workspace)/Output'
     artifact: 'Evaluate'
     publishLocation: 'pipeline'
-
+    displayName: 'Terraform Apply'
+    condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
 
 
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
@@ -79,8 +80,7 @@ steps:
 
 # Apply Terraform Plan
 - task: TerraformTaskV3@3
-  displayName: 'Terraform Apply'
-  condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
+  
   inputs:
     provider: 'aws'
     command: 'apply'
