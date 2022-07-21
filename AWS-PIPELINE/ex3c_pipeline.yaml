@@ -58,6 +58,25 @@ steps:
     artifact: 'Evaluate'
     publishLocation: 'pipeline'
 
+pool:
+    vmImage: 'ubuntu-latest'  
+steps:
+- task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+  displayName: install terraform
+  inputs:
+    terraformVersion: latest
+
+# Terraform init
+- task: TerraformTaskV3@3
+  displayName: 'Terraform Init'
+  inputs:
+    provider: 'aws'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+    backendServiceAWS: $(backendServiceAWS)
+    backendAWSBucketName: $(backendAWSBucketName)
+    backendAWSKey: $(backendAWSKey)    
+
 # Apply Terraform Plan
 - task: TerraformTaskV3@3
   displayName: 'Terraform Apply'
