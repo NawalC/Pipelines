@@ -79,7 +79,6 @@ steps:
 # Apply Terraform Plan
 - task: TerraformTaskV3@3
   displayName: 'Terraform Apply'
-  dependsOn: plan
   condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
   inputs:
     provider: 'aws'
