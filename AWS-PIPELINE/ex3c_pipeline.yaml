@@ -57,9 +57,8 @@ steps:
     targetPath: '$(Pipeline.Workspace)/Output'
     artifact: 'Evaluate'
     publishLocation: 'pipeline'
-- stage: Apply
   pool:
-    vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'
   dependsOn: Plan
 
 # Apply Terraform Plan
