@@ -59,27 +59,33 @@ steps:
     artifact: 'Evaluate'
     publishLocation: 'pipeline'
 
+##### Terraform apply
 
-# - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
-#   displayName: install terraform
-#   inputs:
-#     terraformVersion: latest
 
-# # Terraform init
-# - task: TerraformTaskV3@3
-#   displayName: 'Terraform Init'
-#   inputs:
-#     provider: 'aws'
-#     command: 'init'
-#     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-#     backendServiceAWS: $(backendServiceAWS)
-#     backendAWSBucketName: $(backendAWSBucketName)
-#     backendAWSKey: $(backendAWSKey)    
+  pool:
+    vmImage: 'ubuntu-latest'
+  dependsOn: plan
+  condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))  
+
+- task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+  displayName: install terraform
+  inputs:
+    terraformVersion: latest
+
+# Terraform init
+- task: TerraformTaskV3@3
+  displayName: 'Terraform Init'
+  inputs:
+    provider: 'aws'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+    backendServiceAWS: $(backendServiceAWS)
+    backendAWSBucketName: $(backendAWSBucketName)
+    backendAWSKey: $(backendAWSKey)    
 
 # Apply Terraform Plan
 - task: TerraformTaskV3@3
   displayName: 'Terraform Apply'
-  #condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
   inputs:
     provider: 'aws'
     command: 'apply'
