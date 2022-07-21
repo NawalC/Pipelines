@@ -58,9 +58,7 @@ steps:
     artifact: 'Evaluate'
     publishLocation: 'pipeline'
 
-pool:
-    vmImage: 'ubuntu-latest'  
-steps:
+
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
   displayName: install terraform
   inputs:
