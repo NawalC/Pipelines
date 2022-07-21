@@ -1,0 +1,51 @@
+trigger: none
+
+variables:
+- group: terraform-aws-config
+
+# stages:
+# - stage: plan
+#   jobs:
+#   - job: Deploy
+#     continueOnError: false
+pool:
+    vmImage: 'ubuntu-latest'  
+    steps:
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+      displayName: install terraform
+      inputs:
+        terraformVersion: latest
+    
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform Init'
+      inputs:
+        provider: 'aws'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+        backendServiceAWS: $(backendAWSKey)
+        backendAWSBucketName: $(tf-training-state-file-14072022)
+        backendAWSKey: $(main)
+        
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform Validate'
+      inputs:
+        provider: 'aws'
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+        
+    - task: TerraformTaskV3@3
+      displayName: 'Terraform Plan'
+      inputs:
+        provider: 'aws'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
+        #commandOptions: '-out tfplan'
+        environmentServiceNameAWS: 'pipeline'
+    # - task: TerraformTaskV3@3
+    #   displayName: 'Terraform Apply'
+    #   inputs:
+    #     provider: 'aws'
+    #     command: 'apply'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-Pipeline'
+    #     commandOptions: 'tfplan.out'
+    #     environmentServiceNameAWS: 'pipeline'          
