@@ -31,4 +31,4 @@ steps:
     provider: 'aws'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-    backendServiceAWS: $(backendServiceAWS)       
+    environmentServiceNameAWS: $(backendServiceAWS)     
