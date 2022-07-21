@@ -4,7 +4,7 @@ variables:
 - group: terraform-aws-config
 
 stages:
-  - stage: aws deployment
+  - stage: aws_deployment
 #   jobs:
 #   - job: Deploy
 #     continueOnError: false
