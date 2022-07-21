@@ -5,8 +5,8 @@ variables:
 
 stages:
   - stage: aws_deployment
-#   jobs:
-#   - job: Deploy
+    jobs:
+    - job: Deploy
 #     continueOnError: false
 pool:
     vmImage: 'ubuntu-latest'  
