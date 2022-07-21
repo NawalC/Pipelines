@@ -79,10 +79,10 @@ steps:
 # Apply Terraform Plan
 - task: TerraformTaskV3@3
   displayName: 'Terraform Apply'
-  condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
+  #condition: and(succeeded(), eq(dependencies.plan.outputs['Deploy.Variable.ShouldRun'], 'true'))
   inputs:
     provider: 'aws'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-    commandOptions:  '$(Pipeline.Workspace)/Evaluate/terraform.tfplan'
+    commandOptions:  '$(Pipeline.Workspace)/Output/Evaluate/terraform.tfplan'
     environmentServiceNameAWS: $(backendServiceAWS)     
