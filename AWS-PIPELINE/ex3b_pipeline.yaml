@@ -4,12 +4,18 @@ variables:
 - group: terraform-aws-config
 
 pool:
-    vmImage: 'ubuntu-latest'  
+    vmImage: 'ubuntu-latest'
+
+# Define steps  
 steps:
+
+# Install Terraform
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
   displayName: install terraform
   inputs:
     terraformVersion: latest
+
+# Initialise Terraform
 - task: TerraformTaskV3@3
   displayName: 'Terraform Init'
   inputs:
@@ -18,13 +24,17 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
     backendServiceAWS: $(backendServiceAWS)
     backendAWSBucketName: $(backendAWSBucketName)
-    backendAWSKey: $(backendAWSKey)        
+    backendAWSKey: $(backendAWSKey)  
+
+# Validate Terraform          
 - task: TerraformTaskV3@3
   displayName: 'Terraform Validate'
   inputs:
     provider: 'aws'
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'        
+    workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE' 
+
+# Create Terraform Plan           
 - task: TerraformTaskV3@3
   displayName: 'Terraform Plan'
   inputs:
@@ -32,6 +42,8 @@ steps:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
     environmentServiceNameAWS: $(backendServiceAWS)
+
+# Apply Terraform 
 - task: TerraformTaskV3@3
   displayName: 'Terraform Apply'
   inputs:
