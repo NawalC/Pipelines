@@ -84,5 +84,5 @@ steps:
     provider: 'aws'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/AWS-PIPELINE'
-    commandOptions:  '$(Pipeline.Workspace)/Output/Evaluate/terraform.tfplan'
+    commandOptions:  '$(Pipeline.Workspace)/Output/terraform.tfplan'
     environmentServiceNameAWS: $(backendServiceAWS)     
