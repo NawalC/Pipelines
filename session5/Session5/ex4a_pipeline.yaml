@@ -21,7 +21,7 @@ steps:
   inputs:
     provider: 'aws'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Session5/'
     backendServiceAWS: $(backendServiceAWS)
     backendAWSBucketName: $(backendAWSBucketName)
     backendAWSKey: $(backendAWSKey)
@@ -32,7 +32,7 @@ steps:
   inputs:
     provider: 'aws'
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Session5/'
     environmentServiceNameAWS: $(backendServiceAWS)
 
 # Create artifact directory
@@ -47,7 +47,7 @@ steps:
   inputs:
     provider: 'aws'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Session5/'
     environmentServiceNameAWS: $(backendServiceAWS)
     publishPlanResults: 'terraform.tfplan'
     commandOptions: '-out=$(Pipeline.Workspace)/Output/terraform.tfplan'
@@ -67,6 +67,6 @@ steps:
   inputs:
     provider: 'aws'
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/Session5/'
     commandOptions:  '$(Pipeline.Workspace)/Output/terraform.tfplan'
     environmentServiceNameAWS: $(backendServiceAWS)     
