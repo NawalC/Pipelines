@@ -35,7 +35,7 @@ steps:
 - task: TerraformCLI@0
   displayName: 'Terraform Validate'
   inputs:
-    provider: 'aws'
+    backendType: 'aws'
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
     environmentServiceNameAWS: $(backendServiceAWS)
@@ -50,7 +50,7 @@ steps:
 - task: TerraformCLI@0
   displayName: 'Terraform Plan'
   inputs:
-    provider: 'aws'
+    backendType: 'aws'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
     environmentServiceNameAWS: $(backendServiceAWS)
@@ -70,7 +70,7 @@ steps:
 - task: TerraformCLI@0
   displayName: 'Terraform Apply'
   inputs:
-    provider: 'aws'
+    backendType: 'aws'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
     commandOptions:  '$(Pipeline.Workspace)/Output/terraform.tfplan'
