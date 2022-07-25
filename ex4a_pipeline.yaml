@@ -8,7 +8,7 @@ pool:
 
 # Define steps     
 steps:
-- checkout: self
+
 
 # Install Terraform
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
@@ -17,18 +17,22 @@ steps:
     terraformVersion: latest
 
 # Terraform init
-- task: TerraformTaskV3@3
+- task: TerraformCLI@0
   displayName: 'Terraform Init'
   inputs:
-    provider: 'aws'
+    inputs:
     command: 'init'
+    backendType: 'aws'
+    allowTelemetryCollection: true
+    backendAwsRegion: $(backendAwsRegion)
+    backendAwsBucket: $(backendAWSBucketName)
+    backendAwsKey: $(backendAWSKey)
+    backendServiceAWS : $(backendServiceAWS)
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
-    backendServiceAWS: $(backendServiceAWS)
-    backendAWSBucketName: $(backendAWSBucketName)
-    backendAWSKey: $(backendAWSKey)
+  
 
 # Terraform Validate
-- task: TerraformTaskV3@3
+- task: TerraformCLI@0
   displayName: 'Terraform Validate'
   inputs:
     provider: 'aws'
@@ -43,7 +47,7 @@ steps:
   displayName: 'Create artifact directory'
 
 # Terraform Plan
-- task: TerraformTaskV3@3
+- task: TerraformCLI@0
   displayName: 'Terraform Plan'
   inputs:
     provider: 'aws'
@@ -63,7 +67,7 @@ steps:
     publishLocation: 'pipeline'
     
 # Apply Terraform Plan
-- task: TerraformTaskV3@3
+- task: TerraformCLI@0
   displayName: 'Terraform Apply'
   inputs:
     provider: 'aws'
