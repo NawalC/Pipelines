@@ -10,6 +10,7 @@ pool:
 steps:
 
 # Install Terraform
+- checkout: self
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
   displayName: install terraform
   inputs:
