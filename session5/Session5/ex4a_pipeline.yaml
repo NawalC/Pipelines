@@ -8,13 +8,13 @@ pool:
 
 # Define steps     
 steps:
+- checkout: self
 
 # Install Terraform
-- checkout: self
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
   displayName: install terraform
   inputs:
-    terraformVersion: '1.2.0'
+    terraformVersion: latest
 
 # Terraform init
 - task: TerraformTaskV3@3
