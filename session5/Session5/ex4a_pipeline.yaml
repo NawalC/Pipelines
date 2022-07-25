@@ -13,7 +13,7 @@ steps:
 - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
   displayName: install terraform
   inputs:
-    terraformVersion: latest
+    terraformVersion: '1.2.0'
 
 # Terraform init
 - task: TerraformTaskV3@3
