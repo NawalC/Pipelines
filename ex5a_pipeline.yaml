@@ -51,7 +51,7 @@ steps:
     command: 'custom'
     customCommand: 'mod'
     arguments: 'init module'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
 
 # Add module dependencies
 - task: Go@0
@@ -60,7 +60,7 @@ steps:
     command: 'custom'
     customCommand: 'mod'
     arguments: 'tidy'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
 
 # Run Go Test
 - task: Go@0
@@ -68,7 +68,7 @@ steps:
   inputs:
     command: 'test'
     arguments: '-timeout 1h -v unit_test.go'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
   env:
       #AWS Credentials : $(providerServiceAws)
       AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
@@ -101,7 +101,7 @@ steps:
     command: 'custom'
     customCommand: 'mod'
     arguments: 'init module'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
 
 # Add module dependencies
 - task: Go@0
@@ -110,7 +110,7 @@ steps:
     command: 'custom'
     customCommand: 'mod'
     arguments: 'tidy'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
 
 # Run Go Test
 - task: Go@0
@@ -118,10 +118,11 @@ steps:
   inputs:
     command: 'test'
     arguments: '-timeout 1h -v integration_test.go'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
   env:
       #AWS Credentials : $(providerServiceAws)
       AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
       AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
       # ARM_CLIENT_SECRET: $(ServicePrincipalKey)
-      # ARM_SUBSCRIPTION_ID: $(SubscriptionId)    
+      # ARM_SUBSCRIPTION_ID: $(SubscriptionId)   
+      
