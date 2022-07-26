@@ -20,15 +20,13 @@ steps:
 - task: TerraformCLI@0
   displayName: 'Terraform Init'
   inputs:
-    inputs:
     command: 'init'
-    backendType: 'aws'
-    allowTelemetryCollection: true
-    backendAwsRegion: $(backendAwsRegion)
-    backendAwsBucket: $(backendAWSBucketName)
-    backendAwsKey: $(backendAWSKey)
-    backendServiceAWS : $(backendServiceAWS)
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
+    backendType: 'aws'
+    backendServiceAws: $(backendServiceAWS)
+    backendAwsRegion: $(backendAwsRegion)
+    backendAwsBucket: '$(backendAwsBucket)'
+    backendAwsKey: '$(backendAwsKey)'
   
 
 # Terraform Validate
@@ -38,7 +36,7 @@ steps:
     backendType: 'aws'
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
-    environmentServiceNameAWS: $(backendServiceAWS)
+    backendServiceAWS: $(backendServiceAWS)
 
 # Create artifact directory
 - bash: |
@@ -50,12 +48,12 @@ steps:
 - task: TerraformCLI@0
   displayName: 'Terraform Plan'
   inputs:
-    backendType: 'aws'
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
-    environmentServiceNameAWS: $(backendServiceAWS)
-    publishPlanResults: 'terraform.tfplan'
     commandOptions: '-out=$(Pipeline.Workspace)/Output/terraform.tfplan'
+    publishPlanResults: 'terraform.tfplan'
+    providerServiceAws: '$(providerServiceAws)'
+    providerAwsRegion: 'eu-west-2'
     
     
 # Publish Terraform Plan artifact
@@ -64,14 +62,14 @@ steps:
   inputs:
     targetPath: '$(Pipeline.Workspace)/Output'
     artifact: 'Evaluate'
-    publishLocation: 'pipeline'
+    publishLocation: '$(providerServiceAws)'
     
 # Apply Terraform Plan
 - task: TerraformCLI@0
   displayName: 'Terraform Apply'
   inputs:
-    backendType: 'aws'
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
-    commandOptions:  '$(Pipeline.Workspace)/Output/terraform.tfplan'
-    environmentServiceNameAWS: $(backendServiceAWS)     
+    commandOptions: '$(Pipeline.Workspace)/Output/terraform.tfplan'
+    providerServiceAws: '$(providerServiceAws)'
+    providerAwsRegion: 'eu-west-2'    
