@@ -16,7 +16,7 @@ func TestApplySingleInstanceSingleRegion(t *testing.T) {
 	
 	// retryable errors in terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/",
+		TerraformDir: "../examples/single_region",
 
 		Vars: map[string]interface{}{
 
