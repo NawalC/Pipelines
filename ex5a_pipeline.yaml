@@ -69,15 +69,17 @@ steps:
     command: 'test'
     arguments: '-timeout 1h -v unit_test.go'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
-    AWS Credentials : $(providerServiceAws)
-  # env:
-  #     AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
-  #     AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
-  #     ARM_CLIENT_SECRET: $(ServicePrincipalKey)
-  #     ARM_SUBSCRIPTION_ID: $(SubscriptionId)
+  env:
+      AWS Credentials : $(providerServiceAws)
+      # AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
+      # AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
+      # ARM_CLIENT_SECRET: $(ServicePrincipalKey)
+      # ARM_SUBSCRIPTION_ID: $(SubscriptionId)
 
 
   condition: or(eq(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.Reason'], 'Manual'))
+  pool:
+  vmImage: 'ubuntu-latest'
 
 
 # Install Terraform
@@ -117,9 +119,9 @@ steps:
     command: 'test'
     arguments: '-timeout 1h -v integration_test.go'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployment/Compute/tests'
-    AWS Credentials : $(providerServiceAws)
-  # env:
-  #     AWS_ACCESS_KEY_ID: $(TenantId)
-  #     AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
-  #     ARM_CLIENT_SECRET: $(ServicePrincipalKey)
-  #     ARM_SUBSCRIPTION_ID: $(SubscriptionId)    
+  env:
+      AWS Credentials : $(providerServiceAws)
+      # AWS_ACCESS_KEY_ID: $(TenantId)
+      # AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
+      # ARM_CLIENT_SECRET: $(ServicePrincipalKey)
+      # ARM_SUBSCRIPTION_ID: $(SubscriptionId)    
