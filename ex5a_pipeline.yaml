@@ -97,7 +97,7 @@ steps:
     command: 'custom'
     customCommand: 'mod'
     arguments: 'init module'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests/single_region'
 
 # Add module dependencies
 - task: Go@0
@@ -106,7 +106,7 @@ steps:
     command: 'custom'
     customCommand: 'mod'
     arguments: 'tidy'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests/single_region'
 
 # Run Go Test
 - task: Go@0
