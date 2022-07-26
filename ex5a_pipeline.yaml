@@ -70,9 +70,9 @@ steps:
     arguments: '-timeout 1h -v unit_test.go'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
   env:
-      #AWS Credentials : $(providerServiceAws)
-      AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
-      AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
+      AWS Credentials : $(providerServiceAws)
+      # AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
+      # AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
       # ARM_CLIENT_SECRET: $(ServicePrincipalKey)
       # ARM_SUBSCRIPTION_ID: $(SubscriptionId)
 
@@ -120,9 +120,9 @@ steps:
     arguments: '-timeout 1h -v integration_test.go'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
   env:
-      #AWS Credentials : $(providerServiceAws)
-      AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
-      AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
+      AWS Credentials : $(providerServiceAws)
+      # AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
+      # AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
       # ARM_CLIENT_SECRET: $(ServicePrincipalKey)
       # ARM_SUBSCRIPTION_ID: $(SubscriptionId)   
       
