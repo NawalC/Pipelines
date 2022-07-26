@@ -25,6 +25,12 @@ variable "instance_count" {
   default     = 3
 }
 
+variable "ebs_count" {
+  description = "EBS volume count"
+  type        = number
+  default     = 1
+}
+
 variable "cidr_block" {
   description = "Network address space"
   type        = map(string)

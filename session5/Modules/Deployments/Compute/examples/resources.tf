@@ -8,6 +8,7 @@ module "vm_deployment_eu-west-2" {
   instance_count    = var.instance_count
   instance_type     = var.instance_type
   cidr_block        = lookup(var.cidr_block, "eu-west-2", null)
+  ebs_count         = var.ebs_count
 }
 
 # Create EC2 Instance
@@ -20,4 +21,5 @@ module "vm_deployment_eu-west-1" {
   instance_count    = var.instance_count
   instance_type     = var.instance_type
   cidr_block        = lookup(var.cidr_block, "eu-west-1", null)
+  ebs_count         = var.ebs_count
 }
