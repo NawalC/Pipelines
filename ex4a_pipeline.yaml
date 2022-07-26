@@ -23,7 +23,7 @@ steps:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
     backendType: 'aws'
-    backendServiceAws: $(backendServiceAWS)
+    providerServiceAws: $(providerServiceAws)
     backendAwsRegion: $(backendAwsRegion)
     backendAwsBucket: '$(backendAwsBucket)'
     backendAwsKey: '$(backendAwsKey)'
@@ -36,7 +36,7 @@ steps:
     backendType: 'aws'
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
-    backendServiceAWS: $(backendServiceAWS)
+    providerServiceAws: $(providerServiceAws)
 
 # Create artifact directory
 - bash: |
