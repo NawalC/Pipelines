@@ -23,7 +23,7 @@ steps:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
     backendType: 'aws'
-    providerServiceAws: $(providerServiceAws)
+    backendServiceAws: $(providerServiceAws)
     backendAwsRegion: $(backendAwsRegion)
     backendAwsBucket: '$(backendAwsBucket)'
     backendAwsKey: '$(backendAwsKey)'
