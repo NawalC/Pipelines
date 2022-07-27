@@ -78,45 +78,45 @@ steps:
   condition: or(eq(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.Reason'], 'Manual'))
 
 
-# Install Terraform
-- task: TerraformInstaller@0
-  displayName: 'Terraform Install'
-  inputs:
-    terraformVersion: 'latest'
+# # Install Terraform
+# - task: TerraformInstaller@0
+#   displayName: 'Terraform Install'
+#   inputs:
+#     terraformVersion: 'latest'
 
-# Install Go
-- task: GoTool@0
-  displayName: 'Go Install'
-  inputs:
-    version: '1.18.2'
+# # Install Go
+# - task: GoTool@0
+#   displayName: 'Go Install'
+#   inputs:
+#     version: '1.18.2'
 
-# Create test module
-- task: Go@0
-  displayName: 'Create test module'  
-  inputs:
-    command: 'custom'
-    customCommand: 'mod'
-    arguments: 'init module'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/'
+# # Create test module
+# - task: Go@0
+#   displayName: 'Create test module'  
+#   inputs:
+#     command: 'custom'
+#     customCommand: 'mod'
+#     arguments: 'init module'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/'
 
-# Add module dependencies
-- task: Go@0
-  displayName: 'Get test dependencies'
-  inputs:
-    command: 'custom'
-    customCommand: 'mod'
-    arguments: 'tidy'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/'
+# # Add module dependencies
+# - task: Go@0
+#   displayName: 'Get test dependencies'
+#   inputs:
+#     command: 'custom'
+#     customCommand: 'mod'
+#     arguments: 'tidy'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/'
 
-# Run Go Test
-- task: Go@0
-  displayName: 'Run tests'
-  inputs:
-    command: 'test'
-    arguments: '-timeout 1h -v integration_test.go'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
-  env:
-      AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
-      AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
+# # Run Go Test
+# - task: Go@0
+#   displayName: 'Run tests'
+#   inputs:
+#     command: 'test'
+#     arguments: '-timeout 1h -v integration_test.go'
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/Modules/Deployments/Compute/tests'
+#   env:
+#       AWS_ACCESS_KEY_ID: $(ACCESS_KEY_ID)
+#       AWS_SECRET_ACCESS_KEY: $(SECRET_ACCESS_KEY)
      
       
