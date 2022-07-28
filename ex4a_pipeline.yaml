@@ -42,7 +42,7 @@ steps:
 - task: DownloadGitHubRelease@0
   displayName: 'Download Regula'
   inputs:
-    connection: 'aws-pipeline'
+    connection: 'aws-pipelines'
     userRepository: 'fugue/regula'
     defaultVersionType: 'latest'
     itemPattern: '*Linux_x86_64.tar.gz'
@@ -73,13 +73,4 @@ steps:
     targetPath: '$(Pipeline.Workspace)/Output'
     artifact: 'Evaluate'
     publishLocation: '$(providerServiceAws)'
-    
-# Apply Terraform Plan
-- task: TerraformCLI@0
-  displayName: 'Terraform Apply'
-  inputs:
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
-    commandOptions: '$(Pipeline.Workspace)/Output/terraform.tfplan'
-    providerServiceAws: '$(providerServiceAws)'
-    providerAwsRegion: 'eu-west-2'    
+  
