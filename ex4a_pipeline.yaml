@@ -45,7 +45,7 @@ steps:
     connection: 'aws-pipeline'
     userRepository: 'fugue/regula'
     defaultVersionType: 'latest'
-    itemPattern: '**Linux_x86_64.tar.gz'
+    itemPattern: '*Linux_x86_64.tar.gz'
     downloadPath: '$(System.ArtifactsDirectory)regula'    
 
 # Create artifact directory
