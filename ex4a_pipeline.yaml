@@ -46,7 +46,7 @@ steps:
     userRepository: 'fugue/regula'
     defaultVersionType: 'latest'
     itemPattern: '*Linux_x86_64.tar.gz'
-    downloadPath: '$(System.ArtifactsDirectory)regula'    
+    downloadPath: '$(System.ArtifactsDirectory)/regula'     
 
 # Create artifact directory
 - bash: |
