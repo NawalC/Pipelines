@@ -43,6 +43,7 @@ steps:
   displayName: 'Download Regula'
   inputs:
     connection: 'aws-pipeline'
+    userRepository: 'fugue/regula'
     defaultVersionType: 'latest'
     itemPattern: '**Linux_x86_64.tar.gz'
     downloadPath: '$(System.ArtifactsDirectory)regula'    
