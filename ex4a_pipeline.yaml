@@ -38,6 +38,16 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/session5/'
     providerServiceAws: $(providerServiceAws)
 
+# Download Regula
+- task: DownloadGitHubRelease@0
+  displayName: 'Download Regula'
+  inputs:
+    connection: 'aws-pipeline'
+    userRepository: 'fugue/regula'
+    defaultVersionType: 'latest'
+    itemPattern: '*Linux_x86_64.tar.gz'
+    downloadPath: '$(System.ArtifactsDirectory)/regula'    
+
 # Create artifact directory
 - bash: |
       mkdir -p $(Pipeline.Workspace)/Output
