@@ -42,7 +42,7 @@ steps:
 - task: DownloadGitHubRelease@0
   displayName: 'Download Regula'
   inputs:
-    connection: 'aws-pipelines'
+    connection: 'aws-pipeline'
     userRepository: 'fugue/regula'
     defaultVersionType: 'latest'
     itemPattern: '*Linux_x86_64.tar.gz'
